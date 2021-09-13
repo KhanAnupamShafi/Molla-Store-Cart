@@ -220,29 +220,29 @@ const showProducts = (products) => {
     div.classList.add("product");
 
     //calling rating function
-    const starRate = star(Math.round(product.rating.rate));
+    const starRate = star(product.rating.rate);
 
     div.innerHTML = `
-      <div class="single-product">
+      <div class="single-product navbar-right text-center">
       <div>
       <img class="product-image" src=${image}></img>
       </div>
-      <h3>${product.title}</h3>
+      <h3 class="">${product.title}</h3>
       <p>Category: ${product.category}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <span class="heading">Buyer Rating</span>
-<span id="star1">${starRate}</span>
+      <h2 class="bg-info">Price: $ ${product.price}</h2>
+      <span class="ratings">Buyer Rating</span>
+      <span>${starRate}</span>
 
-<p>${product.rating.rate} average based on ${product.rating.count} reviews.</p>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <p class="ratings"><strong>${product.rating.rate}</strong> average based on <strong>${product.rating.count}</strong> reviews.</p>
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn-info myBtn btn-lg"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+      <button id="details-btn" class="myBtn btn-primary btn-lg">Details</button></div>
       `;
     document.getElementById("all-products").appendChild(div);
 
     //Function for star ratings
     function star(rate) {
       let starHTML = "";
-      const rating = parseInt(rate);
+      const rating = Math.round(rate);
 
       for (let i = 0; i < rating; i++) {
         starHTML += '<i class="fa fa-star orange"></i>';
