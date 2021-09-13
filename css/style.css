@@ -60,6 +60,16 @@ body {
 .cart-main {
   padding-right: 30px;
 }
+
+/* ---------------------------- Custom star color --------------------------- */
+
+.gray {
+  color: gray;
+}
+.orange {
+  color: orange;
+}
+
 @media only screen and (max-width: 768px) {
   #all-products {
     display: grid;
