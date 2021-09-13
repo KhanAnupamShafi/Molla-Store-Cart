@@ -212,7 +212,7 @@ const loadProducts = () => {
   showProducts(data);
 };
 
-// Search field Event handling
+// Search Items Event handling
 
 const searchFunc = (e) => {
   const searchedKey = document
@@ -238,7 +238,7 @@ const filterNotes = (searchedKey) => {
     if (element.innerText.toLowerCase().includes(searchedKey)) {
       element.parentNode.style.display = "block";
     } else {
-      element.parentNode.remove();
+      element.parentNode.style.display = "none";
     }
   }
 };
@@ -250,6 +250,7 @@ const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
 
   for (const product of allProducts) {
+    console.log(product);
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
@@ -270,7 +271,7 @@ const showProducts = (products) => {
 
       <p class="ratings"><strong>${product.rating.rate}</strong> average based on <strong>${product.rating.count}</strong> reviews.</p>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn-info myBtn btn-lg"><i class="fas fa-shopping-cart"></i> Add to cart</button>
-      <button id="details-btn" class="myBtn btn-primary btn-lg">Details</button></div>
+      <button onclick="showDetail(${product.id})" id="details-btn" class="myBtn btn-primary btn-lg" >Details</button></div>
       `;
     document.getElementById("all-products").appendChild(div);
 
@@ -291,6 +292,13 @@ const showProducts = (products) => {
   }
 };
 
+//details
+const details = document.getElementById("details-btn");
+const showDetail = (products) => {
+  console.log(products);
+};
+
+//end deitals
 /* ------------------------------ Cart update ----------------------------- */
 let count = 0;
 const addToCart = (id, price) => {
