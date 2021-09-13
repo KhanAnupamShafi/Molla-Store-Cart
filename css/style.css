@@ -10,36 +10,35 @@ body {
   display: flex;
   padding: 10px;
   justify-content: right;
-  background-color: #265068;
+  background-color: #b8b9c5;
+}
+.search-box {
+  display: flex;
+  width: 40%;
+  align-items: center;
+  justify-content: flex-end;
+
+  margin: auto;
 }
 .search-input {
   display: flex;
-  width: 100%;
+  width: 90%;
   background-color: #fff;
-  border: none;
-  padding: 10px 10px;
-  outline: none;
+  border: 3px solid green;
+  font-size: 1.5em;
+  padding-left: 10px;
+  padding-right: 20px;
 }
-.search-input:hover {
+.search-box:hover {
   outline: none;
   border: none;
 }
 
-.search-box {
-  display: flex;
-  width: 50%;
-  align-items: center;
-  justify-content: flex-end;
-  border: 2px solid rgb(3, 118, 211);
-  border-radius: 8px;
-  margin: auto;
-
-  border-right: none;
-  background-color: azure;
-}
 .search-button {
   width: 25%;
-  border-radius: 25px;
+  padding: 8px;
+  border: 2px solid rgb(63, 26, 2);
+  border-radius: 2px;
 }
 
 .brand {
@@ -83,7 +82,7 @@ body {
 .single-product:hover {
   box-shadow: 4px 4px 7px gray;
   border-radius: 10px;
-  border: 1px solid cyan;
+  border: 1px solid #7ac64d;
 }
 .product-image {
   width: 180px;
@@ -93,13 +92,13 @@ body {
   width: 380px;
   /* border: 1px solid green; */
   padding: 10px;
-  box-shadow: 10px 10px 20px gray;
+  box-shadow: 10px 10px 20px rgb(128, 128, 128);
   border-radius: 5px;
   margin-top: 30px;
   position: fixed;
   right: 30px;
   font-size: 1.2em;
-  background-color: #c8c6c4;
+  background-color: #f6f4fc;
 }
 .cart-main {
   padding-left: 100px;

@@ -1,3 +1,4 @@
+/* ------------------------------ Load all data ----------------------------- */
 const loadProducts = () => {
   const data = [
     {
@@ -207,10 +208,44 @@ const loadProducts = () => {
       rating: { rate: 3.6, count: 145 },
     },
   ];
+
   showProducts(data);
 };
 
-// show all product in UI
+// Search field Event handling
+
+const searchFunc = (e) => {
+  const searchedKey = document
+    .getElementById("input-field")
+    .value.toLowerCase();
+
+  document.getElementById("input-field").value = "";
+
+  filterNotes(searchedKey);
+  e.preventDefault();
+};
+
+const filterNotes = (searchedKey) => {
+  if (searchedKey === "") {
+    return;
+  }
+  const name = document.getElementsByClassName("title");
+  name.textContent = "";
+  for (let i = 0; i < name.length; i++) {
+    const element = name[i];
+    console.log(searchedKey);
+
+    if (element.innerText.toLowerCase().includes(searchedKey)) {
+      element.parentNode.style.display = "block";
+    } else {
+      element.parentNode.remove();
+    }
+  }
+};
+
+//End search result
+
+/* ------------------------- Show all product in UI ------------------------- */
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
 
@@ -227,7 +262,7 @@ const showProducts = (products) => {
       <div>
       <img class="product-image" src=${image}></img>
       </div>
-      <h3 class="">${product.title}</h3>
+      <h3 class="title">${product.title}</h3>
       <p>Category: ${product.category}</p>
       <h2 class="bg-info">Price: $ ${product.price}</h2>
       <span class="ratings">Buyer Rating</span>
@@ -255,6 +290,8 @@ const showProducts = (products) => {
     }
   }
 };
+
+/* ------------------------------ Cart update ----------------------------- */
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -315,4 +352,5 @@ const updateTotal = () => {
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
+
 loadProducts();
