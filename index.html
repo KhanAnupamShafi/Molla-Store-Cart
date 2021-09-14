@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FakeStore</title>
+    <title>Molla Paradise Store</title>
     <link rel="stylesheet" href="./css/style.css" />
     <!-- Latest compiled and minified CSS -->
     <link
@@ -39,7 +39,7 @@
             alt="Responsive image"
             src="./images/retina_logo.png"
           />
-          <h1 class="brand-title">Boutiqe</h1>
+          <h1 class="brand-title">Paradise</h1>
         </div>
         <div class="search-box">
           <input id="input-field" class="search-input" type="text" />
@@ -47,7 +47,7 @@
           <button
             type="button"
             id="search-btn"
-            class="btn-success search-button"
+            class="search-button"
             data-toggle="button"
             aria-pressed="false"
             autocomplete="off"
@@ -57,6 +57,69 @@
           </button>
         </div>
       </div>
+      <!-- --------------------------- Product details --------------------------- -->
+      <section id="detail-container" class="well details-product">
+        <div
+          id="carousel-example-generic"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li
+              data-target="#carousel-example-generic"
+              data-slide-to="0"
+              class="active"
+            ></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div id="carousel-slider">
+            <div class="carousel-inner carousel" role="listbox">
+              <div class="item active">
+                <img class="img-responsive" src="./images/1_bg.jpg" alt="..." />
+              </div>
+              <div class="item">
+                <img class="img-responsive" src="./images/3_bg.jpg" alt="..." />
+              </div>
+
+              <div class="carousel-caption text-wrapper">
+                <h4 class="text-wraper"></h4>
+              </div>
+            </div>
+          </div>
+          <!-- Controls -->
+          <a
+            class="left carousel-control"
+            href="#carousel-example-generic"
+            role="button"
+            data-slide="prev"
+          >
+            <span
+              class="glyphicon glyphicon-chevron-left"
+              aria-hidden="true"
+            ></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a
+            class="right carousel-control"
+            href="#carousel-example-generic"
+            role="button"
+            data-slide="next"
+          >
+            <span
+              class="glyphicon glyphicon-chevron-right"
+              aria-hidden="true"
+            ></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        <div id="desc" class="container"></div>
+      </section>
+      <!-- -------------------------- List of products --------------------------- -->
       <div class="row">
         <div class="col-md-9 col-lg-9 col-sm-7">
           <div id="all-products" class=""></div>
@@ -88,7 +151,7 @@
                 </tr>
                 <tr>
                   <th>Delivery-Charge:</th>
-                  <td>$ <span id="delivery-charge">20.00</span></td>
+                  <td>$ <span id="delivery-charge">20</span></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -106,13 +169,44 @@
               </tbody>
             </table>
             <div class="parces text-center">
-              <button class="btn btn-success text-center">Buy Now</button>
+              <button class="btn btn-primary text-center">Buy Now</button>
             </div>
           </div>
         </div>
       </div>
     </main>
-    <footer></footer>
+    
+    <!-- --------------------------- Footer section ---------------------------- -->
+    <footer class="footer-bs">
+      <div class="row">
+          <div class="col-md-8 footer-brand">
+            <span><img src="./images/retina_logo.png" alt="">&reg;</span>
+            <h2>Join us</h2>
+            <p>We will let you know when we have new arrivals, events and promo's don't worry we send them infrequently,
+                just a friendly hi now and again!
+            </p>
+            <p>© 2014 Khan Anupam Shafi, All rights reserved</p>
+          </div>
+          <div class="col-md-4 footer-ns animated fadeInRight">
+            <h4>Newsletter</h4>
+            <p>A rover wearing a fuzzy suit doesn’t alarm the real penguins</p>
+            <p>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
+                </span>
+            </div>
+            <!-- /input-group -->
+            </p>
+          </div>
+      </div>
+    </footer>
+
+    <!-- add bootstrap script -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
     <!-- add javascript  file  -->
     <script src="./js/app.js"></script>

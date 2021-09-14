@@ -214,7 +214,7 @@ const loadProducts = () => {
 
 // Search Items Event handling
 
-const searchFunc = (e) => {
+const searchFunc = () => {
   const searchedKey = document
     .getElementById("input-field")
     .value.toLowerCase();
@@ -222,23 +222,23 @@ const searchFunc = (e) => {
   document.getElementById("input-field").value = "";
 
   filterNotes(searchedKey);
-  e.preventDefault();
 };
 
 const filterNotes = (searchedKey) => {
   if (searchedKey === "") {
-    return;
+    location.reload();
   }
   const name = document.getElementsByClassName("title");
   name.textContent = "";
   for (let i = 0; i < name.length; i++) {
     const element = name[i];
-    console.log(searchedKey);
 
     if (element.innerText.toLowerCase().includes(searchedKey)) {
       element.parentNode.style.display = "block";
+      element.parentNode.parentNode.style.display = "block";
     } else {
       element.parentNode.style.display = "none";
+      element.parentNode.parentNode.style.display = "none";
     }
   }
 };
@@ -246,21 +246,21 @@ const filterNotes = (searchedKey) => {
 //End search result
 
 /* ------------------------- Show all product in UI ------------------------- */
+
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
 
   for (const product of allProducts) {
-    console.log(product);
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
 
-    //calling rating function
+    //Calling rating function
     const starRate = star(product.rating.rate);
 
     div.innerHTML = `
       <div class="single-product navbar-right text-center">
-      <div>
+      <div class="">
       <img class="product-image" src=${image}></img>
       </div>
       <h3 class="title">${product.title}</h3>
@@ -273,9 +273,11 @@ const showProducts = (products) => {
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn-info myBtn btn-lg"><i class="fas fa-shopping-cart"></i> Add to cart</button>
       <button onclick="showDetail(${product.id})" id="details-btn" class="myBtn btn-primary btn-lg" >Details</button></div>
       `;
+
     document.getElementById("all-products").appendChild(div);
 
     //Function for star ratings
+
     function star(rate) {
       let starHTML = "";
       const rating = Math.round(rate);
@@ -292,13 +294,81 @@ const showProducts = (products) => {
   }
 };
 
-//details
-const details = document.getElementById("details-btn");
-const showDetail = (products) => {
-  console.log(products);
+/* -------------------------------- Detail of Profucts showing in the UI ------------------------------- */
+const url =
+  "https://raw.githubusercontent.com/ProgrammingHero1/ranga-store-api/main/ranga-api.json";
+const showDetail = (id) => {
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => getDetails(data, id));
+};
+const details = document.getElementById("detail-container");
+details.style.display = "none";
+//close details section
+const closeDetail = () => {
+  details.style.display = "none";
 };
 
-//end deitals
+const getDetails = (data, id) => {
+  details.style.display = "flex";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  data.forEach((element) => {
+    if (element.id === id) {
+      const div1 = document.createElement("div");
+      const div2 = document.createElement("div");
+      const description = document.getElementById("desc");
+      const carousel = document.getElementById("carousel-slider");
+      carousel.innerHTML = "";
+      description.innerHTML = "";
+
+      div1.innerHTML = `
+       <div class="carousel-inner carousel" role="listbox">
+           <div class="item active">
+              <img
+                class="img-responsive"
+                src="${element.image}"
+                alt="..."
+              />              
+            </div>
+            <div class="item">
+              <img class="img-responsive" src="./images/1_bg.jpg" alt="..." />
+              
+            </div>
+            <div class="item">
+              <img class="img-responsive" src="./images/3_bg.jpg" alt="..." />
+              
+            </div>
+           
+            <div class="carousel-caption text-wrapper">
+                <h4 class="text-wraper">${element.title}</h4>
+              </div>
+          </div>
+          `;
+      document.getElementById("carousel-slider").appendChild(div1);
+
+      div2.innerHTML = ` <h1>Description:</h1>
+          <p class="">
+            ${element.description}
+          </p>
+          <p>
+            <a class="btn btn-success btn-lg" href="#" role="button"
+              >Learn more</a
+            >
+          </p>
+          
+      <p>Category: ${element.category}</p>
+      <h2><mark>Price: $${element.price}</mark></h2>
+      <span class="ratings">Buyer Rating</span>    
+
+      <p class="ratings"><strong>${element.rating.rate}</strong> average based on <strong>${element.rating.count}</strong> reviews.</p>
+      <button onclick="addToCart(${element.id},${element.price})" id="addToCart-btn" class="buy-now btn-info myBtn btn-lg"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+      <button onclick="closeDetail()" id="details-btn" class="myBtn btn-danger btn-lg" >Close</button></div>          
+          `;
+      document.getElementById("desc").appendChild(div2);
+    } else return;
+  });
+};
+
 /* ------------------------------ Cart update ----------------------------- */
 let count = 0;
 const addToCart = (id, price) => {
@@ -322,7 +392,7 @@ const getInputValue = (id) => {
   return converted;
 };
 
-// main price update function
+// Main price update function
 const updatePrice = (id, value) => {
   const convertedOldPrice = getInputValue(id);
   const convertPrice = parseFloat(value);
@@ -330,12 +400,15 @@ const updatePrice = (id, value) => {
   document.getElementById(id).innerText = total.toFixed(2);
 };
 
-// set innerText function
+// Set innerText function
 const setInnerText = (id, value) => {
-  document.getElementById(id).innerText = Math.round(value).toFixed(2);
+  console.log(id);
+  if (id === "total-tax") {
+    document.getElementById(id).innerText = value.toFixed(2);
+  } else document.getElementById(id).innerText = value;
 };
 
-// update delivery charge and total Tax
+// Update delivery charge and total Tax
 const updateTaxAndCharge = () => {
   const priceConverted = getInputValue("price");
   if (priceConverted > 200) {
@@ -352,7 +425,7 @@ const updateTaxAndCharge = () => {
   }
 };
 
-//grandTotal update function
+//GrandTotal update function
 const updateTotal = () => {
   const grandTotal =
     getInputValue("price") +
